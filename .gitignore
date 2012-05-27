@@ -23,7 +23,7 @@ git/
 tmp
 *.pyc 
 manage.py
-settings.py
+#settings.py
 *.json
 *#*
 *~ 
