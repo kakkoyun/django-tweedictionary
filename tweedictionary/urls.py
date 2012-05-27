@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Social Auth urls.
-    url(r'', include(social_auth.urls)),
+    url(r'', include('social_auth.urls')),
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     
     # Tweedictionary urls.
