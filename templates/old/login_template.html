@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tweedictionary</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Gizem" >
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap2.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+  </head>
+
+  <body>	
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="brand" href="index.html">Tweedictionary</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="credits.html">Credits</a></li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          <ul class="nav pull-right">
+          	<li><a href="register.html">Sign in</a></li>
+            <li class="active"><a href="login.html">Log in</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+
+<!-- alphabetic bar -->
+ <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <div class="nav-collapse">
+          <ul class="alphabetic">
+            <li><a href="/alphabeth/A">A</a></li>
+            <li><a href="/alphabeth/B">B</a></li>
+            <li><a href="/alphabeth/#">C</a></li>
+            <li><a href="/alphabeth/#">D</a></li>
+            <li><a href="/alphabeth/#">E</a></li>
+            <li><a href="/alphabeth/#">F</a></li>
+            <li><a href="/alphabeth/#">G</a></li>
+            <li><a href="/alphabeth/#">H</a></li>
+            <li><a href="/alphabeth/#">I</a></li>
+            <li><a href="/alphabeth/#">J</a></li>
+            <li><a href="/alphabeth/#">K</a></li>
+            <li><a href="/alphabeth/#">L</a></li>
+            <li><a href="/alphabeth/#">M</a></li>
+            <li><a href="/alphabeth/#">N</a></li>
+            <li><a href="/alphabeth/#">O</a></li>
+            <li><a href="/alphabeth/#">P</a></li>
+            <li><a href="/alphabeth/#">Q</a></li>
+            <li><a href="/alphabeth/#">R</a></li>
+            <li><a href="/alphabeth/#">S</a></li>
+            <li><a href="/alphabeth/#">T</a></li>
+            <li><a href="/alphabeth/#">U</a></li>
+            <li><a href="/alphabeth/#">V</a></li>
+            <li><a href="/alphabeth/#">W</a></li>
+            <li><a href="/alphabeth/#">X</a></li>
+            <li><a href="/alphabeth/#">Y</a></li>
+            <li><a href="/alphabeth/#">Z</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div>
+    </div>
+
+<!-- alphabetic bar end -->
+
+  </div><!-- /navbar -->
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Hot Items</li>
+              {% for item in items|dictsort:"last_update"?[:30] %}
+              <li><a href=/item/{{ item.id }}>{{ item.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <h2>Log in</h2>
+          </div>
+            
+	<div class="control-group">
+            <div class="controls">
+	     <form method="link" action="user.html">
+              <input class="input-xlarge focused" id="focusedInput" type="text" placeholder="Email">
+	      <br>
+	      <input class="input-xlarge focused" id="focusedInput" type="password" placeholder="Password">
+	      <br>
+	      <label class="checkbox">
+      		    <input type="checkbox"> Remember me
+              </label>
+	      <br>
+	      <button type="submit" class="btn btn-primary">Log in</button>
+	     </form>
+            </div>
+        </div>
+            
+
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
