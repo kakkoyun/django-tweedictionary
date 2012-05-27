@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin', #rev@01.05.12
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'south',
+    # 'south',
     'social_auth',
 
 )
@@ -159,7 +159,7 @@ LOGGING = {
 
 # Authentication Backends rev@01.05.12
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
+     'social_auth.backends.twitter.TwitterBackend',
  #   'social_auth.backends.facebook.FacebookBackend',
  #   'social_auth.backends.google.GoogleOAuthBackend',
  #   'social_auth.backends.google.GoogleOAuth2Backend',
@@ -192,3 +192,8 @@ LOGIN_ERROR_URL    = '/login-error/'
 # If a default user name needed.
 import random
 SOCIAL_AUTH_DEFAULT_USERNAME = lambda: random.choice(['Darth Vader', 'Obi-Wan Kenobi', 'R2-D2', 'C-3PO', 'Yoda'])
+
+#rev@27.05.12
+# We will see what is this?
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
