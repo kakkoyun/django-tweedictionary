@@ -178,14 +178,26 @@ AUTHENTICATION_BACKENDS = (
      'django.contrib.auth.backends.ModelBackend', #reb@02.05.12 to enable loggin to admin page
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    #'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+)
+
+SOCIAL_AUTH_ENABLED_BACKENDS = (
+    'twitter',
+    )
+
+
 #rev@01.05.12
 TWITTER_CONSUMER_KEY = 'a9C7inSeWn2JDXrBjjB2eQ'
 TWITTER_CONSUMER_SECRET = 'cD40YdtH1YhAMUSkFC431hWdDhw6VSgWO0EOW46ND7k'
 
 #rev@27.05.12
 #waiting to be editting.
-LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_URL          = '/login/'
+LOGIN_REDIRECT_URL = '/profile/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 #rev@27.05.12
