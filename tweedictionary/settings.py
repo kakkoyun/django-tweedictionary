@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin', #rev@01.05.12
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'south',
+    # 'south',
     'social_auth',
 
 )
