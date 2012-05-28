@@ -21,13 +21,13 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     
     # Tweedictionary urls.
-    #url(r'^$', 'dictionary.views.index'),
-    #url(r'^(?P<item_id>\d+)/$', 'dictionary.views.item'),
-    #url(r'^profile/$', 'dictionary.views.profile'),
-    #url(r'^additem/$', 'dictionary.views.additem'),
-    #url(r'^credits/$', 'dictionary.views.credits'),
-    #url(r'^edit/(?P<entry_id>\d+)/$', 'dictionary.views.edit'),
-    #url(r'^alphabeth/(?[A-Z]{1})$', 'dictionary.views.alphabeth'),
+    url(r'^$', 'dictionary.views.index'),
+    url(r'^(?I<item_id>\d+)/', 'dictionary.views.item'),
+    url(r'^profile/', 'dictionary.views.profile'),
+    url(r'^additem/', 'dictionary.views.additem'),
+    url(r'^credits/', 'dictionary.views.credits'),
+    url(r'^edit/(?E<entry_id>\d+)/', 'dictionary.views.edit'),
+    url(r'^alphabeth/(?[A-Z]{1})', 'dictionary.views.alphabeth'),
 
 
 )
