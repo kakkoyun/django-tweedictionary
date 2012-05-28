@@ -18,7 +18,7 @@ def hot_items():
 def home(request):
     """Home view"""
     """random choose item content """
-    number_of_records = models.Item.objects.count()
+    number_of_records = Item.objects.count()
     item_id = int(random.random()*number_of_records)+1
     i = get_object_or_404(Item, id=item_id)
     ctx = {
