@@ -27,11 +27,11 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
        </a>
-       <a class="brand" href="index.html">Tweedictionary</a>
+       <a class="brand" href="#">Tweedictionary</a>
        <div class="nav-collapse">
           <ul class="nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="credits.html">Credits</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="credits">Credits</a></li>
           </ul>
           <form class="navbar-search pull-left" action="">
             <input type="text" class="search-query span2" placeholder="Search">
@@ -50,32 +50,32 @@
 <header class="jumbotron subhead" id="overview">
   <div class="subnav">
     <ul class="nav nav-pills">
-	<li><a href="/alphabeth/A">A</a></li>
-	<li><a href="/alphabeth/B">B</a></li>
-	<li><a href="/alphabeth/C">C</a></li>
-	<li><a href="/alphabeth/D">D</a></li>
-	<li><a href="/alphabeth/E">E</a></li>
-	<li><a href="/alphabeth/F">F</a></li>
-	<li><a href="/alphabeth/G">G</a></li>
-	<li><a href="/alphabeth/H">H</a></li>
-	<li><a href="/alphabeth/I">I</a></li>
-	<li><a href="/alphabeth/J">J</a></li>
-	<li><a href="/alphabeth/K">K</a></li>
-	<li><a href="/alphabeth/L">L</a></li>
-	<li><a href="/alphabeth/M">M</a></li>
-	<li><a href="/alphabeth/N">N</a></li>
-	<li><a href="/alphabeth/O">O</a></li>
-	<li><a href="/alphabeth/P">P</a></li>
-	<li><a href="/alphabeth/Q">Q</a></li>
-	<li><a href="/alphabeth/R">R</a></li>
-	<li><a href="/alphabeth/S">S</a></li>
-	<li><a href="/alphabeth/T">T</a></li>
-	<li><a href="/alphabeth/U">U</a></li>
-	<li><a href="/alphabeth/V">V</a></li>
-	<li><a href="/alphabeth/W">W</a></li>
-	<li><a href="/alphabeth/X">X</a></li>
-	<li><a href="/alphabeth/Y">Y</a></li>
-	<li><a href="/alphabeth/Z">Z</a></li>
+	<li><a href="/alphabet/A">A</a></li>
+	<li><a href="/alphabet/B">B</a></li>
+	<li><a href="/alphabet/C">C</a></li>
+	<li><a href="/alphabet/D">D</a></li>
+	<li><a href="/alphabet/E">E</a></li>
+	<li><a href="/alphabet/F">F</a></li>
+	<li><a href="/alphabet/G">G</a></li>
+	<li><a href="/alphabet/H">H</a></li>
+	<li><a href="/alphabet/I">I</a></li>
+	<li><a href="/alphabet/J">J</a></li>
+	<li><a href="/alphabet/K">K</a></li>
+	<li><a href="/alphabet/L">L</a></li>
+	<li><a href="/alphabet/M">M</a></li>
+	<li><a href="/alphabet/N">N</a></li>
+	<li><a href="/alphabet/O">O</a></li>
+	<li><a href="/alphabet/P">P</a></li>
+	<li><a href="/alphabet/Q">Q</a></li>
+	<li><a href="/alphabet/R">R</a></li>
+	<li><a href="/alphabet/S">S</a></li>
+	<li><a href="/alphabet/T">T</a></li>
+	<li><a href="/alphabet/U">U</a></li>
+	<li><a href="/alphabet/V">V</a></li>
+	<li><a href="/alphabet/W">W</a></li>
+	<li><a href="/alphabet/X">X</a></li>
+	<li><a href="/alphabet/Y">Y</a></li>
+	<li><a href="/alphabet/Z">Z</a></li>
     </ul>
   </div>
 </header>
@@ -91,7 +91,7 @@
               <li class="nav-header">Hot Items</li>
               
               <!--Hot items render-->
-              {% for item in items|dictsort:"last_update"?[:30] %}
+              {% for item in hot_items %}
               <li><a href=/item/{{ item.id }}>{{ item.name }}</a></li>
               {% endfor %}
               
@@ -102,6 +102,7 @@
         <div class="span9">
 		{% block content %}{% endblock %}
         </div><!--/span-->
+        
       </div><!--/row-->
 
       <hr>
@@ -121,7 +122,7 @@
     <script src="../jsnew/bootstrap-dropdown.js"></script>
     <script src="../jsnew/bootstrap-scrollspy.js"></script>
     <script src="../jsnew/bootstrap-collapse.js"></script>
-	<script src="../jsnew/bootstrap-tooltip.js"></script>
+    <script src="../jsnew/bootstrap-tooltip.js"></script>
     <script src="../jsnew/application.js"></script>
     <script src="../jsnew/bootswatch.js"></script>
 
