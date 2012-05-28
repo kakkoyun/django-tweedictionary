@@ -24,9 +24,9 @@ urlpatterns = patterns('',
     
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
-    #url(r'^(?P<item_id>\d+)/', items, name='items'),
-    url(r'^profile/', profile, name='profile'),
-    url(r'^additem/', additem, name='additem'),
+    url(r'^(?P<item_id>\d+)/', items, name='items'),
+    #url(r'^profile/', profile, name='profile'),
+    #url(r'^additem/', additem, name='additem'),
     url(r'^credits/', credits, name='credits'),
     #url(r'^edit/(?P<entry_id>\d+)/', edit, name='edit'),
     #url(r'^alphabet/(?[A-Z]{1})', alphabet, name='alphabet'),

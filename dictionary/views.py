@@ -11,12 +11,13 @@ from dictionary.models import Item, Entry
 
 from social_auth.utils import setting
 
+
 def hot_items():
     """hot-items filter"""
     obj_list = Item.objects.all().order_by("id")
     return obj_list[:30]
     
-
+# done
 def home(request):
     """Home view"""
     """random choose item content """
@@ -45,7 +46,7 @@ def home(request):
 #    }
 #    return render_to_response('user.html', ctx, RequestContext(request))
     
-    
+
 def items(request,item_id):
     """Item page"""
     if request.user.is_authenticated():
@@ -64,6 +65,7 @@ def item_log(request,item_id):
     i = get_object_or_404(Item, id=item_id)
     return render_to_response('user.html', {'item': i}, RequestContext(request))
 
+# done
 def credits(request):
     """Credits page"""
     if request.user.is_authenticated():
