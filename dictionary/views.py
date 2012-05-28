@@ -11,33 +11,38 @@ from social_auth.utils import setting
 
 def hot_items():
     """hot-items filter"""
-    obj_list = Entry.objects.all().order_by("id")
+    obj_list = Item.objects.all().order_by("id")
     return obj_list[:30]
     
 
 def home(request):
     """Home view"""
     """random choose item content """
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('user')
-    else:
-    	i = get_object_or_404(Item, id=item_id)
-    	ctx = {
-            'item': i,
-            'hot_items': hot_items()
-    	}
-        return render_to_response('index.html', ctx, RequestContext(request))
-
-@login_required
-def user(request):
-    """Login complete view"""
-    """ random choose item content """
+    number_of_records = models.Item.objects.count()
+    item_id = int(random.random()*number_of_records)+1
     i = get_object_or_404(Item, id=item_id)
     ctx = {
-        'item': i,
-        'hot_items': hot_items()
+            'item': i,
+            'hot_items': hot_items()
     }
-    return render_to_response('user.html', ctx, RequestContext(request))
+    if request.user.is_authenticated():
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
+        return render_to_response('index.html', ctx, RequestContext(request))
+
+#@login_required
+#def user(request):
+#    """Login complete view"""
+#    """ random choose item content """
+#    number_of_records = models.Item.objects.count()
+#    item_id = int(random.random()*number_of_records)+1
+#    i = get_object_or_404(Item, id=item_id)
+#    ctx = {
+#        'item': i,
+#        'hot_items': hot_items()
+#    }
+#    return render_to_response('user.html', ctx, RequestContext(request))
+    
     
 def items(request,item_id):
     """Item page"""
