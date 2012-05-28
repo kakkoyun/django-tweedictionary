@@ -60,14 +60,10 @@ def item_log(request,item_id):
 def credits(request):
     """Credits page"""
     if request.user.is_authenticated():
-        return HttpResponseRedirect('credits_log')
+        """Login complete credits"""
+        return render_to_response('credits_log.html', {'hot_items' : hot_items()}, RequestContext(request))
     else:
         return render_to_response('credits.html', {'hot_items' : hot_items()}, RequestContext(request))
-                 
-@login_required
-def credits_log(request):
-    """Login complete credits"""
-    return render_to_response('credits_log.html', {'hot_items' : hot_items()}, RequestContext(request))
 
 @login_required
 def edit(request,entry_id):
