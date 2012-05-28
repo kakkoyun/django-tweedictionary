@@ -46,7 +46,7 @@ def home(request):
 #    }
 #    return render_to_response('user.html', ctx, RequestContext(request))
     
-
+# done
 def items(request,item_id):
     """Item page"""
     i = get_object_or_404(Item, id=item_id)
