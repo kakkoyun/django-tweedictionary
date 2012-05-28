@@ -21,13 +21,13 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url' : '/login/twitter/'}),
     
     # Tweedictionary urls.
-    url(r'^$', 'dictionary.views.index', name='home'),
-    #url(r'^(?I<item_id>\d+)/', 'dictionary.views.item', name='items'),
-    url(r'^profile/', 'dictionary.views.profile', name='profile'),
-    url(r'^additem/', 'dictionary.views.additem', name='additem'),
-    url(r'^credits/', 'dictionary.views.credits', name='credits'),
-    #url(r'^edit/(?E<entry_id>\d+)/', 'dictionary.views.edit', name='edit'),
-    #url(r'^alphabet/(?[A-Z]{1})', 'dictionary.views.alphabet', name='alphabet'),
+    url(r'^$', 'tweedictionary.dictionary.views.index', name='home'),
+    #url(r'^(?I<item_id>\d+)/', 'tweedictionary.dictionary.views.item', name='items'),
+    url(r'^profile/', 'tweedictionary.dictionary.views.profile', name='profile'),
+    url(r'^additem/', 'tweedictionary.dictionary.views.additem', name='additem'),
+    url(r'^credits/', 'tweedictionary.dictionary.views.credits', name='credits'),
+    #url(r'^edit/(?E<entry_id>\d+)/', 'tweedictionary.dictionary.views.edit', name='edit'),
+    #url(r'^alphabet/(?[A-Z]{1})', 'tweedictionary.dictionary.views.alphabet', name='alphabet'),
 
 
 )
