@@ -9,6 +9,11 @@ from dictionary.models import Item, Entry
 
 from social_auth.utils import setting
 
+def hot_items():
+    """hot-items filter"""
+    obj_list = Item.objects.all().order_by("last_update")
+    return obj_list[:30]
+
 def home(request):
     """Home view"""
     """random choose item content """
@@ -16,12 +21,38 @@ def home(request):
         return HttpResponseRedirect('user')
     else:
     	i = get_object_or_404(Item, id=item_id)
-        return render_to_response('index.html', {'item': i}, RequestContext(request))
+    	ctx = {
+            'item': i,
+            'hot_items': hot_items()
+    	}
+        return render_to_response('index.html', ctx, RequestContext(request))
 
 @login_required
 def user(request):
     """Login complete view"""
     """ random choose item content """
+    i = get_object_or_404(Item, id=item_id)
+    ctx = {
+        'item': i,
+        'hot_items': hot_items()
+    }
+    return render_to_response('user.html', ctx, RequestContext(request))
+    
+def items(request,item_id):
+    """Item page"""
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('item_log')
+    else:
+    	i = get_object_or_404(Item, id=item_id)
+    	ctx = {
+            'item': i,
+            'hot_items': hot_items()
+    	}
+        return render_to_response('index.html', ctx, RequestContext(request))
+
+@login_required
+def item_log(request,item_id):
+    """Login complete item page"""
     i = get_object_or_404(Item, id=item_id)
     return render_to_response('user.html', {'item': i}, RequestContext(request))
 
@@ -30,32 +61,22 @@ def credits(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('credits_log')
     else:
-        return render_to_response('credits.html', RequestContext(request))
+        return render_to_response('credits.html', {'hot_items' : hot_items()}, RequestContext(request))
                  
 @login_required
 def credits_log(request):
-    """Login complete view"""
-    return render_to_response('credits_log.html', RequestContext(request))
+    """Login complete credits"""
+    return render_to_response('credits_log.html', {'hot_items' : hot_items()}, RequestContext(request))
 
 @login_required
 def edit(request,entry_id):
     """Edit page"""
     e = get_object_or_404(Entry, id=entry_id)
-    return render_to_response('edit.html', {'entry': e}, RequestContext(request))
-
-def items(request,item_id):
-    """Item page"""
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('item_log')
-    else:
-    	i = get_object_or_404(Item, id=item_id)
-        return render_to_response('index.html', {'item': i}, RequestContext(request))
-
-@login_required
-def item_log(request,item_id):
-    """Item page"""
-    i = get_object_or_404(Item, id=item_id)
-    return render_to_response('user.html', {'item': i}, RequestContext(request))
+    ctx = {
+        'entry': e,
+        'hot_items': hot_items()
+    }
+    return render_to_response('edit.html', ctx, RequestContext(request))
 
 @login_required
 def additem(request):
@@ -74,11 +95,19 @@ def alphabet(request,char):
     	return HttpResponseRedirect('alphabet_log')
     else:
     	listofitems
-        return render_to_response('list.html', {'item_list': listofitems}, RequestContext(request))
+    	ctx = {
+            'item_list': listofitems,
+            'hot_items': hot_items()
+    	}
+        return render_to_response('list.html', ctx, RequestContext(request))
 
 @login_required
 def alphabet_log(request,char):
     """alphabet"""
     """search items"""
     listofitems
-    return render_to_response('list_log.html', {'item_list': listofitems}, RequestContext(request))
+    ctx = {
+        'item_list': listofitems,
+        'hot_items': hot_items()
+    }
+    return render_to_response('list_log.html', ctx, RequestContext(request))
