@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
+from dictionary.views import home, profile, additem, credits, items, edit, alphabet
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -21,13 +23,13 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     
     # Tweedictionary urls.
-    url(r'^$', 'dictionary.views.index', name='home'),
-    #url(r'^(?I<item_id>\d+)/', 'tweedictionary.dictionary.views.item', name='items'),
-    url(r'^profile/', 'dictionary.views.profile', name='profile'),
-    url(r'^additem/', 'dictionary.views.additem', name='additem'),
-    url(r'^credits/', 'dictionary.views.credits', name='credits'),
-    #url(r'^edit/(?E<entry_id>\d+)/', 'tweedictionary.dictionary.views.edit', name='edit'),
-    #url(r'^alphabet/(?[A-Z]{1})', 'tweedictionary.dictionary.views.alphabet', name='alphabet'),
+    url(r'^$', home, name='home'),
+    #url(r'^(?P<item_id>\d+)/', items, name='items'),
+    url(r'^profile/', profile, name='profile'),
+    url(r'^additem/', additem, name='additem'),
+    url(r'^credits/', credits, name='credits'),
+    #url(r'^edit/(?P<entry_id>\d+)/', edit, name='edit'),
+    #url(r'^alphabet/(?[A-Z]{1})', alphabet, name='alphabet'),
 
 
 )
