@@ -11,8 +11,9 @@ from social_auth.utils import setting
 
 def hot_items():
     """hot-items filter"""
-    obj_list = Item.objects.all().order_by("last_update")
+    obj_list = Entry.objects.all().order_by("id")
     return obj_list[:30]
+    
 
 def home(request):
     """Home view"""
