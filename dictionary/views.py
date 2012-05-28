@@ -49,21 +49,15 @@ def home(request):
 
 def items(request,item_id):
     """Item page"""
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('item_log')
-    else:
-    	i = get_object_or_404(Item, id=item_id)
-    	ctx = {
+    i = get_object_or_404(Item, id=item_id)
+    ctx = {
             'item': i,
             'hot_items': hot_items()
-    	}
+    }
+    if request.user.is_authenticated():
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
         return render_to_response('index.html', ctx, RequestContext(request))
-
-@login_required
-def item_log(request,item_id):
-    """Login complete item page"""
-    i = get_object_or_404(Item, id=item_id)
-    return render_to_response('user.html', {'item': i}, RequestContext(request))
 
 # done
 def credits(request):
