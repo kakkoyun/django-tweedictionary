@@ -5,6 +5,8 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib.messages.api import get_messages
 
+import random
+
 from dictionary.models import Item, Entry
 
 from social_auth.utils import setting
