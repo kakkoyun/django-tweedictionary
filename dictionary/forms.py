@@ -1,6 +1,7 @@
 import datetime
 from django import forms
 from dictionary.models import Entry, Item
+from dictionary.operations import send
 
 class EntryForm(forms.ModelForm):
     class Meta:
@@ -14,4 +15,5 @@ class EntryForm(forms.ModelForm):
         item.last_modified = datetime.datetime.now()
         item.save()
         entry.save()
+        send(request, entry.id)
         return entry
