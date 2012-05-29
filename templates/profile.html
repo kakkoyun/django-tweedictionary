@@ -16,7 +16,7 @@
 
 {% block content %}
           <div class="hero-unit">
-            <h2>{{user.username}}</h2> - {{ user.first_name }} {{ user.last_name }} - {{ user.email }}
+            <h2>{{user.username}}</h2> {{ user.first_name }} {{ user.last_name }} - {{ user.email }}
           </div>
         {% for e in user.entries.all %}
             <div class="span9">
