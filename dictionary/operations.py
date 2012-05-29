@@ -19,14 +19,15 @@ def send(request,entry_id):
 	consumer = oauth.Consumer(consumer_key,consumer_secret)
 	client = oauth.Client(consumer,token)
 
-	data = (get_object_or_404(Entry, id=entry_id).content)[:115]+"..."+shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
+	#data = (get_object_or_404(Entry, id=entry_id).content)[:115]+"..."+shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
+	data = get_object_or_404(Entry, id=entry_id).content
 	request_uri = 'https://api.twitter.com/1/statuses/update.json'
 	resp, content = client.request(request_uri, 'POST', urlencode(data))
 
-def shorten_url(long_url):
-     username = settings.BITLY_USERNAME
-     password = settings.BITLY_PASSWORD
-     bitly_url = "http://api.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, password, long_url)
-     #req_url = urlencode(bitly_url)
-     short_url = urlopen(bitly_url).read()
-     return short_url
+#def shorten_url(long_url):
+#     username = settings.BITLY_USERNAME
+#     password = settings.BITLY_PASSWORD
+#     bitly_url = "http://api.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, password, long_url)
+#     #req_url = urlencode(bitly_url)
+#     short_url = urlopen(bitly_url).read()
+#     return short_url
