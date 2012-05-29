@@ -197,7 +197,7 @@ TWITTER_CONSUMER_SECRET = 'cD40YdtH1YhAMUSkFC431hWdDhw6VSgWO0EOW46ND7k'
 #rev@27.05.12
 #waiting to be editting.
 LOGIN_URL          = '/login/'
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/login-error/'
 
 #rev@27.05.12
