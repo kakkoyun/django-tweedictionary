@@ -39,5 +39,19 @@
 			
 	    </div><!--/span-->
 	{% endfor %}
+<div class="span9">	
+<form action="{% url add_entry item.id %}" method="POST" class="form-horizontal well">
+	<div class="control-group">
+            <label class="control-label" for="textarea">Entry:</label>
+            <div class="controls">
+              <textarea class="input-xlarge" id="textarea" rows="5"></textarea>
+            </div>
+	</div>
+
+	<div class="form-actions">
+      	<button type="submit" class="btn btn-primary">Post and Tweet</button>
+	</div>
+</form>
+</div><!--/span-->
 
 {% endblock %}

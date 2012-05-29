@@ -66,8 +66,18 @@ def credits(request):
         return render_to_response('credits.html', {'hot_items' : hot_items()}, RequestContext(request))
 
 @login_required
-def edit(request,entry_id):
-    """Edit page"""
+def edit_entry(request,entry_id):
+    """Entry edit page"""
+    e = get_object_or_404(Entry, id=entry_id)
+    ctx = {
+        'entry': e,
+        'hot_items': hot_items()
+    }
+    return render_to_response('edit.html', ctx, RequestContext(request))
+    
+@login_required
+def edit_item(request,item_id):
+    """Item edit page"""
     e = get_object_or_404(Entry, id=entry_id)
     ctx = {
         'entry': e,
@@ -76,7 +86,7 @@ def edit(request,entry_id):
     return render_to_response('edit.html', ctx, RequestContext(request))
 
 @login_required
-def additem(request):
+def add_item(request):
     """Add item page"""
     return render_to_response('additem.html', RequestContext(request))
 
@@ -86,6 +96,7 @@ def profile(request):
     """profile"""
     return render_to_response('profile.html', {'hot_items': hot_items()}, RequestContext(request))
 
+# done
 def public(request, user_id):
     """public profile"""
     if request.user.is_authenticated() and request.user.id == user_id:
