@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, additem, credits, items, edit, alphabet
+from dictionary.views import home, profile, additem, credits, items, edit, alphabet, logout
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     # Social Auth urls.
     url(r'', include('social_auth.urls')),
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
+    url(r'^logout/$', logout, name='logout'),
     
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
@@ -30,6 +31,7 @@ urlpatterns = patterns('',
     url(r'^credits/', credits, name='credits'),
     #url(r'^edit/(?P<entry_id>\d+)/', edit, name='edit'),
     url(r'^alphabet/(?P<char>[A-Z]{1})/', alphabet, name='alphabet'),
+    
 
 
 )

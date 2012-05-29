@@ -21,6 +21,12 @@ def hot_items():
     return obj_list[:30]
     
 # done
+@login_required
+def logout(request):
+    auth_logout(request)
+    return HttpResponseRedirect("/")
+    
+# done
 def home(request):
     """Home view"""
     """random choose item content """
