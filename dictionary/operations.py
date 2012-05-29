@@ -2,8 +2,6 @@ from django.conf import settings
 from urllib import urlencode
 from urllib2 import urlopen
 from dictionary.models import Entry
-
-import settings
 import oauth2 as oauth
 
 def send(request,entry_id):
