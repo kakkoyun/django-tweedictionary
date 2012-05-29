@@ -11,7 +11,7 @@ from dictionary.models import Item, Entry
 
 from social_auth.utils import setting
 
-
+# done
 def hot_items():
     """hot-items filter"""
     obj_list = Item.objects.all().order_by("-last_modified")
@@ -93,23 +93,12 @@ def profile(request):
 def alphabet(request,char):
     """alphabet"""
     """search items"""
-    if request.user.is_authenticated():
-    	return HttpResponseRedirect('alphabet_log')
-    else:
-    	listofitems
-    	ctx = {
-            'item_list': listofitems,
-            'hot_items': hot_items()
-    	}
-        return render_to_response('list.html', ctx, RequestContext(request))
-
-@login_required
-def alphabet_log(request,char):
-    """alphabet"""
-    """search items"""
-    listofitems
+    listofitems = Item.objects.filter(name__startswith='char')
     ctx = {
         'item_list': listofitems,
         'hot_items': hot_items()
     }
-    return render_to_response('list_log.html', ctx, RequestContext(request))
+    if request.user.is_authenticated():
+    	return render_to_response('list_log.html', ctx, RequestContext(request))
+    else:
+        return render_to_response('list.html', ctx, RequestContext(request))
