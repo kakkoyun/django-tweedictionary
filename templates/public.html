@@ -8,15 +8,14 @@
 
 {% block content %}
           <div class="hero-unit">
-            <h2>{{public_user.username}}</h2>
+            <h2>{{entry.belong.name}}</h2>
           </div>
-        {% for e in public_user.entries.all %}
             <div class="span9">
               
-              <p>{{ forloop.counter }}.  {{ e.content }}</p>
-              <p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right" href="/public/{{ e.author.id }}">, {{ e.author }}</a> <a class="pull-right" href="/item/{{ e.belong.id }}">{{ e.belong.name }}</a></p>
+              <p>{{ entry.content }}</p>
+              <p><h6 class="pull-right">, {{ entry.date }}</h6> <a class="pull-right" href="/public/{{ entry.author.id }}">, {{ entry.author }}</a> <a class="pull-right" href="/item/{{ entry.belong.id }}">{{ entry.belong.name }}</a></p>
 			
 	    </div><!--/span-->
-	{% endfor %}
+	    <a class="btn" href="/item/{{ entry.belong.id }}">See all entries</a>
 
 {% endblock %}

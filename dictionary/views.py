@@ -167,3 +167,19 @@ def add_entry(request,item_id):
             'entryform': entryform
     }
     return render_to_response('user.html', ctx, RequestContext(request))
+    
+def entry(request, entry_id):
+    """entry show page"""
+    entry = get_object_or_404(Entry, id=entry_id)
+    if request.user.is_authenticated():
+    	ctx = {
+    		'entry' : entry,
+    		'hot_items': hot_items()
+    	}
+	return render_to_response('entry_log.html', ctx, RequestContext(request))
+    else:
+    	ctx = {
+    		'entry' : entry,
+    		'hot_items': hot_items()
+    	}
+	return render_to_response('entry.html', ctx, RequestContext(request))

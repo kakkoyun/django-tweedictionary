@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, add_item, add_entry, credits, items, edit_entry, edit_item, alphabet, logout, public, login_error
+from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, edit_item, alphabet, logout, public, login_error
 
 from django.contrib import admin
 admin.autodiscover()
@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
     url(r'^item/(?P<item_id>\d+)/', items, name='items'),
+    url(r'^entry/(?P<entry_id>\d+)/', entry, name='entry'),
     url(r'^profile/', profile, name='profile'),
     url(r'^add_item/', add_item, name='add_item'),
     url(r'^add_entry/(?P<item_id>\d+)/', add_entry, name='add_entry'),
