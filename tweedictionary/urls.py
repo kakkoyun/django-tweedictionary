@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     #url(r'^additem/', additem, name='additem'),
     url(r'^credits/', credits, name='credits'),
     #url(r'^edit/(?P<entry_id>\d+)/', edit, name='edit'),
-    url(r'^alphabet/(?[A-Z]{1})', alphabet, name='alphabet'),
+    url(r'^alphabet/(?P<char>[A-Z]{1})/', alphabet, name='alphabet'),
 
 
 )
