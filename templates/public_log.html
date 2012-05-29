@@ -16,13 +16,13 @@
 
 {% block content %}
           <div class="hero-unit">
-            <h2>{{item.name}}</h2>
+            <h2>{{public_user.username}}</h2>
           </div>
-
-        {% for e in entries %}
+        {% for e in public_user.entries.all %}
             <div class="span9">
+              
               <p>{{ forloop.counter }}.  {{ e.content }}</p>
-              <p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right" href="/public/{{ e.author.id }}"> {{ e.author }}</a> </p>
+              <p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right" href="/public/{{ e.author.id }}">, {{ e.author }}</a> <a class="pull-right" href="/item/{{ e.belong.id }}">{{ e.belong.name }}</a></p>
 
             {% if user.id == e.author.id %}
 				<br>

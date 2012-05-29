@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, additem, credits, items, edit, alphabet, logout
+from dictionary.views import home, profile, additem, credits, items, edit, alphabet, logout, public
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^credits/', credits, name='credits'),
     #url(r'^edit/(?P<entry_id>\d+)/', edit, name='edit'),
     url(r'^alphabet/(?P<char>[A-Z]{1})/', alphabet, name='alphabet'),
-    
+    url(r'^public/(?P<user_id>\d+)/', public, name='public'),
 
 
 )

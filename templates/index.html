@@ -14,7 +14,7 @@
 	
 		<div class="span9">
 		<p>{{ forloop.counter }}.  {{ e.content }}</p>
-		<p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right"> {{ e.author }}</a> </p>
+		<p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right" href="/public/{{ e.author.id }}"> {{ e.author }}</a> </p>
 		</div><!--/span-->
 	{% endfor %}
 {% endblock %}

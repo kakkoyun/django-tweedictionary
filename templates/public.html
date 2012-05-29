@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+	<ul class="nav pull-right">
+		<li><a href="/login">Log in</a></li>
+	</ul>
+{% endblock %}
+
+{% block content %}
+          <div class="hero-unit">
+            <h2>{{public_user.username}}</h2>
+          </div>
+        {% for e in public_user.entries.all %}
+            <div class="span9">
+              
+              <p>{{ forloop.counter }}.  {{ e.content }}</p>
+              <p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right" href="/public/{{ e.author.id }}">, {{ e.author }}</a> <a class="pull-right" href="/item/{{ e.belong.id }}">{{ e.belong.name }}</a></p>
+			
+	    </div><!--/span-->
+	{% endfor %}
+
+{% endblock %}

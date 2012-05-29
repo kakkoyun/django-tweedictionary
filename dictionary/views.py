@@ -79,10 +79,30 @@ def additem(request):
     """Add item page"""
     return render_to_response('additem.html', RequestContext(request))
 
+# done
 @login_required
 def profile(request):
     """profile"""
-    return render_to_response('profile.html', RequestContext(request))
+    return render_to_response('profile.html', {'hot_items': hot_items()}, RequestContext(request))
+
+def public(request, user_id):
+    """public profile"""
+    if request.user.is_authenticated() and request.user.id == user_id:
+    	return render_to_response('profile.html', {'hot_items': hot_items()}, RequestContext(request))
+    elif request.user.is_authenticated():
+    	public_user = get_object_or_404(User, id=user_id)
+    	ctx = {
+    		'public_user' : public_user,
+    		'hot_items': hot_items()
+    	}
+	return render_to_response('public_log.html', ctx, RequestContext(request))
+    else:
+    	public_user = get_object_or_404(User, id=user_id)
+    	ctx = {
+    		'public_user' : public_user,
+    		'hot_items': hot_items()
+    	}
+	return render_to_response('public.html', ctx, RequestContext(request))
 
 # done
 def alphabet(request,char):
