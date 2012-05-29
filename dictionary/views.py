@@ -53,6 +53,7 @@ def items(request,item_id):
     i = get_object_or_404(Item, id=item_id)
     ctx = {
             'item': i,
+            'entries': i.entries.all(),
             'hot_items': hot_items()
     }
     if request.user.is_authenticated():
