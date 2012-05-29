@@ -15,7 +15,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="span9">
           <div class="hero-unit">
             <h2>{{item.name}}</h2>
           </div>
@@ -25,7 +24,7 @@
               <p>{{ forloop.counter }}.  {{ e.content }}</p>
               <p><h6 class="pull-right">, {{ e.date }}</h6> <a class="pull-right"> {{ e.author }}</a> </p>
 
-            {% if user.name == e.author %}
+            {% if user.username == e.author %}
 				<br>
 				<div class="btn-group pull-right">
   				<button class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
@@ -40,8 +39,5 @@
 			
 	    </div><!--/span-->
 	{% endfor %}
-            
-		</div><!--/span-->
 
-</div><!--/span-->
 {% endblock %}
