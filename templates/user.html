@@ -41,7 +41,6 @@
 	{% endfor %}	
 <form action="{% url add_entry item.id %}" method="POST">
 {% csrf_token %}
-            <label class="control-label" for="textarea">Entry:</label>
             <div class="controls">
               <textarea class="input-xlarge" id="textarea" rows="5"></textarea>
             </div>
