@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+	<ul class="nav pull-right">
+		<li><a href="/login">Log in</a></li>
+	</ul>
+{% endblock %}
+
+{% block content %}
+          <div class="hero-unit">
+            <h2>{{entry.belong.name}}</h2>
+          </div>
+            <div class="span9">
+              
+              <p>{{ entry.content }}</p>
+              <p><h6 class="pull-right">, {{ entry.date }}</h6> <a class="pull-right" href="/public/{{ entry.author.id }}">, {{ entry.author }}</a> <a class="pull-right" href="/item/{{ entry.belong.id }}">{{ entry.belong.name }}</a></p>
+			
+	    </div><!--/span-->
+	    <a class="btn" href="/item/{{ entry.belong.id }}">See all entries</a>
+
+{% endblock %}
