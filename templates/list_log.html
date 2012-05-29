@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+	<ul class="nav pull-right">
+          <li><a href="/additem">Add an Item</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ user.username }} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile">Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="/logout">Log out</a></li>
+              </ul>
+            </li>
+         </ul>
+{% endblock %}
+
+{% block content %}
+<div class="hero-unit">
+	<h2>{{char}}</h2>
+</div>
+	<ul>
+	{% for i in items %}
+	<div class=span9>
+		<li>{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a></li>
+	</div>
+	{% endfor %}
+	</ul>
+{% endblock %}

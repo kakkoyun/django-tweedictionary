@@ -10,9 +10,11 @@
 <div class="hero-unit">
 	<h2>{{char}}</h2>
 </div>
-	
+	<ul>
 	{% for i in items %}
-		{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a>
+	<div class=span9>
+		<li>{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a></li>
+	</div>
 	{% endfor %}
-
+	</ul>
 {% endblock %}
