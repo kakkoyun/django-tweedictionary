@@ -4,7 +4,7 @@ from urllib2 import urlopen
 from dictionary.models import Entry
 from django.shortcuts import get_object_or_404
 import oauth2 as oauth
-import twitter
+from twitter import Api
 
 def send(request,entry_id):
 	twitter_user = request.user.social_auth.get(provider='twitter')
@@ -20,7 +20,7 @@ def send(request,entry_id):
 	consumer = oauth.Consumer(consumer_key,consumer_secret)
 	client = oauth.Client(consumer,token)
 	
-	api = twitter.Api(consumer_key=consumer_key, consumer_secret=consumer_secret, 
+	api = Api(consumer_key=consumer_key, consumer_secret=consumer_secret, 
           access_token_key=settings.TWITTER_CONSUMER_KEY, access_token_secret=settings.TWITTER_CONSUMER_SECRET)
           
         api.PostUpdate(get_object_or_404(Entry, id=entry_id).content)
