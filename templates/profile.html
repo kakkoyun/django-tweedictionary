@@ -20,7 +20,7 @@
           </div>
           
 	<h5>{{ user.first_name }} {{ user.last_name }} - {{ user.email }}</h5>
-        {% for e in user.entries.all() %}
+        {% for e in user.entries.all %}
             <div class="span9">
               
               <p>{{ forloop.counter }}.  {{ e.belong.name }}<br>{{ e.content }}</p>
