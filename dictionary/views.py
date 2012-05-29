@@ -40,15 +40,15 @@ def home(request):
             'entries': i.entries.all(),
             'hot_items': hot_items(),
             'entryform': entryform
-    	}
+            }
         return render_to_response('user.html', ctx, RequestContext(request))
     else:
-   	 ctx = {
+	ctx = {
             'item': i,
             'entries': i.entries.all(),
             'hot_items': hot_items()
-   	 }
-        return render_to_response('index.html', ctx, RequestContext(request))
+            }
+	return render_to_response('index.html', ctx, RequestContext(request))
     
 # done
 def items(request,item_id):
