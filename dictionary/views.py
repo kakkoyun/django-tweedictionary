@@ -10,6 +10,9 @@ import random
 from dictionary.models import Item, Entry
 
 from social_auth.utils import setting
+# done
+def random_item():
+    return Item.objects.order_by('?')[0]
 
 # done
 def hot_items():
@@ -21,9 +24,7 @@ def hot_items():
 def home(request):
     """Home view"""
     """random choose item content """
-    number_of_records = Item.objects.count()
-    item_id = int(random.random()*number_of_records)+1
-    i = get_object_or_404(Item, id=item_id)
+    i = random_item()
     ctx = {
             'item': i,
             'entries': i.entries.all(),
@@ -33,19 +34,6 @@ def home(request):
         return render_to_response('user.html', ctx, RequestContext(request))
     else:
         return render_to_response('index.html', ctx, RequestContext(request))
-
-#@login_required
-#def user(request):
-#    """Login complete view"""
-#    """ random choose item content """
-#    number_of_records = models.Item.objects.count()
-#    item_id = int(random.random()*number_of_records)+1
-#    i = get_object_or_404(Item, id=item_id)
-#    ctx = {
-#        'item': i,
-#        'hot_items': hot_items()
-#    }
-#    return render_to_response('user.html', ctx, RequestContext(request))
     
 # done
 def items(request,item_id):
@@ -90,6 +78,7 @@ def profile(request):
     """profile"""
     return render_to_response('profile.html', RequestContext(request))
 
+# done
 def alphabet(request,char):
     """alphabet"""
     """search items"""
