@@ -93,11 +93,11 @@ def profile(request):
 def alphabet(request,char):
     """alphabet"""
     """search items"""
-    listofitems = Item.objects.filter(name__startswith='char.lower()')
+    items = Item.objects.filter(name__startswith='char.lower()')
     ctx = {
-        'item_list': listofitems,
+        'items': items,
         'hot_items': hot_items(),
-        'char': char
+        'char': char.lower()
     }
     if request.user.is_authenticated():
     	return render_to_response('list_log.html', ctx, RequestContext(request))
