@@ -14,7 +14,7 @@ from social_auth.utils import setting
 
 def hot_items():
     """hot-items filter"""
-    obj_list = Item.objects.all().order_by("last_modified")
+    obj_list = Item.objects.all().order_by("-last_modified")
     return obj_list[:30]
     
 # done
