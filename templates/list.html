@@ -11,7 +11,7 @@
 	<h2>{{char}}</h2>
 </div>
 	
-	{% for i in item_list %}
+	{% for i in items %}
 		{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a>
 	{% endfor %}
 
