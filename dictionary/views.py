@@ -93,7 +93,7 @@ def profile(request):
 def alphabet(request,char):
     """alphabet"""
     """search items"""
-    items = Item.objects.filter(name__startswith='char.lower()')
+    items = Item.objects.filter(name__startswith=char.lower())
     ctx = {
         'items': items,
         'hot_items': hot_items(),
