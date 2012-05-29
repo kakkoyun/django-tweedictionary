@@ -209,3 +209,7 @@ SOCIAL_AUTH_DEFAULT_USERNAME = lambda: random.choice(['Darth Vader', 'Obi-Wan Ke
 # We will see what is this?
 SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+BITLY_USERNAME = 'tweedictionary'
+BITLY_PASSWORD = 'repltwit15'
+
