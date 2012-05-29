@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     # 'south',
     'social_auth',
-
+    'dictionary', # gizem@28.05.2012 added to enable database
 )
 
 # A sample logging configuration. The only tangible logging
