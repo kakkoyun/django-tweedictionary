@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="nav pull-right">
+		<li><a href="/login">Log in</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="hero-unit">
+	<h2>{{char}}</h2>
+	</div>
+	<div class="span9">
+	<ul>
+	{% for i in item_list %}
+		<li>{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a></li>
+	{% endfor %}
+	</ul>
+</div><!--/span-->
+{% endblock %}

@@ -96,7 +96,8 @@ def alphabet(request,char):
     listofitems = Item.objects.filter(name__startswith='char')
     ctx = {
         'item_list': listofitems,
-        'hot_items': hot_items()
+        'hot_items': hot_items(),
+        'char': char
     }
     if request.user.is_authenticated():
     	return render_to_response('list_log.html', ctx, RequestContext(request))
