@@ -130,3 +130,7 @@ def alphabet(request,char):
     	return render_to_response('list_log.html', ctx, RequestContext(request))
     else:
         return render_to_response('list.html', ctx, RequestContext(request))
+       
+def login_error(request):
+    """Add item page"""
+    return render_to_response('login_error.html', RequestContext(request))
