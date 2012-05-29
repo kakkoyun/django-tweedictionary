@@ -33,28 +33,42 @@ def home(request):
     """Home view"""
     """random choose item content """
     i = random_item()
+    entryform = EntryForm()
+    if request.user.is_authenticated():
+    ctx = {
+            'item': i,
+            'entries': i.entries.all(),
+            'hot_items': hot_items(),
+            'entryform': entryform
+    }
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
     ctx = {
             'item': i,
             'entries': i.entries.all(),
             'hot_items': hot_items()
     }
-    if request.user.is_authenticated():
-        return render_to_response('user.html', ctx, RequestContext(request))
-    else:
         return render_to_response('index.html', ctx, RequestContext(request))
     
 # done
 def items(request,item_id):
     """Item page"""
     i = get_object_or_404(Item, id=item_id)
-    ctx = {
-            'item': i,
-            'entries': i.entries.all(),
-            'hot_items': hot_items()
-    }
+    entryform = EntryForm()
     if request.user.is_authenticated():
+ 	 ctx = {
+		'item': i,
+		'entries': i.entries.all(),
+		'hot_items': hot_items(),
+		'entryform': entryform
+  	  }
         return render_to_response('user.html', ctx, RequestContext(request))
     else:
+    	ctx = {
+     	       'item': i,
+     	       'entries': i.entries.all(),
+     	       'hot_items': hot_items()
+ 	   }
         return render_to_response('index.html', ctx, RequestContext(request))
 
 # done
@@ -144,4 +158,12 @@ def add_entry(request,item_id):
     	entryform = EntryForm(request.POST)
     	if entryform.is_valid():
     		entryform.save(request,item)
-    return HttpResponseRedirect("/item/%s" %item_id)
+    else:
+    	entryform = EntryForm()
+    ctx = {
+    	    'item': item,
+            'entries': item.entries.all(),
+            'hot_items': hot_items(),
+            'entryform': entryform
+    }
+    return render_to_response('user.html', ctx, RequestContext(request))
