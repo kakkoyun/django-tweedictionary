@@ -12,7 +12,7 @@ class Item(models.Model):
 class Entry(models.Model):
     content = models.TextField(max_length=5000)
     author = models.ForeignKey(User)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
     last_modified = models.DateTimeField(auto_now=True)
     belong = models.ForeignKey(Item, related_name="entries")
     class Meta:
