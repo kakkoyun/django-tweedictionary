@@ -134,3 +134,8 @@ def alphabet(request,char):
 def login_error(request):
     """Add item page"""
     return render_to_response('login_error.html', RequestContext(request))
+    
+@login_required
+def add_entry(request,item_id):
+    """Add item page"""
+    return HttpResponseRedirect("/item/%s" %item_id)
