@@ -38,8 +38,7 @@
 	    {% endif %}
 			
 	    </div><!--/span-->
-	{% endfor %}
-<div class="span9">	
+	{% endfor %}	
 <form action="{% url add_entry item.id %}" method="POST" class="form-horizontal well">
 {% csrf_token %}
 	<div class="control-group">
@@ -53,6 +52,5 @@
       	<button type="submit" class="btn btn-primary">Post and Tweet</button>
 	</div>
 </form>
-</div><!--/span-->
 
 {% endblock %}
