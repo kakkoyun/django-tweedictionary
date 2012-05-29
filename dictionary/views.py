@@ -8,6 +8,7 @@ from django.contrib.messages.api import get_messages
 import random
 
 from dictionary.models import Item, Entry
+from dictionary.forms import EntryForm
 from django.contrib.auth.models import User
 
 from social_auth.utils import setting
@@ -137,5 +138,10 @@ def login_error(request):
     
 @login_required
 def add_entry(request,item_id):
-    """Add item page"""
+    """Add entry page"""
+    item = get_object_or_404(Item, id=item_id)
+    if request.POST:
+    	entryform = EntryForm(request.POST)
+    	if entryform.is_valid():
+    		entryform.save(request,item)
     return HttpResponseRedirect("/item/%s" %item_id)
