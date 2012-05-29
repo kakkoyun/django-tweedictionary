@@ -22,7 +22,7 @@ def send(request,entry_id):
 	#data = (get_object_or_404(Entry, id=entry_id).content)[:115]+"..."+shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
 	data = get_object_or_404(Entry, id=entry_id).content
 	request_uri = 'https://api.twitter.com/1/statuses/update.json'
-	resp, content = client.request(request_uri, 'POST', urlencode(data))
+	resp, content = client.request(request_uri, 'POST', data)
 
 #def shorten_url(long_url):
 #     username = settings.BITLY_USERNAME
