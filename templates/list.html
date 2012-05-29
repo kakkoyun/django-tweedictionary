@@ -9,14 +9,10 @@
 {% block content %}
 <div class="hero-unit">
 	<h2>{{char}}</h2>
-	</div>
+</div>
 	
-	<ul>
 	{% for i in item_list %}
-		<div class="span9">
-		<li>{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a></li>
-		</div><!--/span-->
+		{{ forloop.counter }}.  <a href="/item/{{ i.id }}">{{ i.name }}</a>
 	{% endfor %}
-	</ul>
 
 {% endblock %}
