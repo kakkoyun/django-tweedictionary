@@ -24,8 +24,8 @@ def send(request,entry_id):
 	resp, content = client.request(request_uri, 'POST', urlencode(data))
 
 def shorten_url(long_url):
-     username = settings['BITLY_USERNAME']
-     password = settings['BITLY_PASSWORD']
+     username = settings.BITLY_USERNAME
+     password = settings.BITLY_PASSWORD
      bitly_url = "http://api.bit.ly/v3/shorten?login={0}&apiKey={1}&longUrl={2}&format=txt"
      req_url = urlencode(bitly_url.format(username, password, long_url))
      short_url = urlopen(req_url).read()
