@@ -8,6 +8,7 @@ from django.contrib.messages.api import get_messages
 import random
 
 from dictionary.models import Item, Entry
+from django.contrib.auth.models import User
 
 from social_auth.utils import setting
 # done
