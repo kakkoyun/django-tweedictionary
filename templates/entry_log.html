@@ -2,7 +2,7 @@
 
 {% block navbar %}
 	<ul class="nav pull-right">
-          <li><a href="/additem">Add an Item</a></li>
+          <li><a href="/add_item">Add an Item</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ user.username }} <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -28,8 +28,8 @@
 				<div class="btn-group pull-right">
   				<button class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown">Actions <span class="caret"></span></button>
   				<ul class="dropdown-menu">
-  					<li><a href="/edit/{{ entry.id }}">Edit</a></li>
-  					<li><a href="/retweet/{{ entry.id }}">Retweet</a></li>
+  					<li><a href="/edit_entry/{{ entry.id }}">Edit</a></li>
+  					<li><a href="/retweet/{{ entry.id }}">Tweet</a></li>
   					<li class="divider"></li>
   					<li><a href="/delete/{{ entry.id }}">Delete</a></li>
  				</ul>
