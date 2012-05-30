@@ -39,7 +39,6 @@ def shorten_url(long_url):
     short_url = api.shorten(long_url)
 #    bitly_url = "https://api-ssl.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, api_key, long_url)
 #    short_url = urlopen(bitly_url).read()
-    print short_url
     return short_url
 
 #API Address: https://api-ssl.bitly.com
