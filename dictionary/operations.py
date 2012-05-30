@@ -26,9 +26,9 @@ def send(request,entry_id):
           access_token_key=access_token,
           access_token_secret=access_token_secret)
 
-    data = (get_object_or_404(Entry, id=entry_id).content)[:122]+"..."+shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
-    api.PostUpdate(get_object_or_404(Entry, id=entry_id).content)
-    #data = get_object_or_404(Entry, id=entry_id).content
+    twit = (get_object_or_404(Entry, id=entry_id).content)[:114] + "... " + shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
+    api.PostUpdate(twit)
+    #twit = get_object_or_404(Entry, id=entry_id).content
 
 def shorten_url(long_url):
     username = settings.BITLY_USERNAME
@@ -39,6 +39,7 @@ def shorten_url(long_url):
     short_url = api.shorten(long_url)
 #    bitly_url = "https://api-ssl.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, api_key, long_url)
 #    short_url = urlopen(bitly_url).read()
+    print short_url
     return short_url
 
 #API Address: https://api-ssl.bitly.com
