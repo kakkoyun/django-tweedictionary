@@ -235,3 +235,16 @@ def entry(request, entry_id):
     		'hot_items': hot_items()
     	}
 	return render_to_response('entry.html', ctx, RequestContext(request))
+
+# done
+@login_required
+def delete(request,entry_id):
+	"""Delete entry function"""
+	entry = get_object_or_404(Entry, id=entry_id)
+	entry.delete()
+	ctx = {
+		'item': entry.belong,
+		'entries': entry.belong.entries.all(),
+		'hot_items': hot_items()
+	}
+	return render_to_response('user.html', ctx, RequestContext(request))
