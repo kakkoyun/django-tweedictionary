@@ -131,7 +131,7 @@ def edit_item(request,item_id):
        }
     return render_to_response('edit_item.html', ctx, RequestContext(request))
 
-
+# done
 @login_required
 def add_item(request):
     """Add item page"""
@@ -200,6 +200,7 @@ def login_error(request):
     """Add item page"""
     return render_to_response('login_error.html', RequestContext(request))
 
+# done
 @login_required
 def add_entry(request,item_id):
     """Add entry page"""
@@ -218,6 +219,7 @@ def add_entry(request,item_id):
     }
     return render_to_response('user.html', ctx, RequestContext(request))
 
+# done
 def entry(request, entry_id):
     """entry show page"""
     entry = get_object_or_404(Entry, id=entry_id)
