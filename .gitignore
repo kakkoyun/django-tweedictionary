@@ -19,11 +19,13 @@ log
 logs/
 parts
 dynamic/
+static/
 git/
 tmp
 *.pyc 
 manage.py
-#settings.py
+settings.py
+wsgi.py
 *.json
 *#*
 *~ 
