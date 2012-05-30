@@ -31,6 +31,6 @@ urlpatterns = patterns('',
     url(r'^edit_entry/(?P<entry_id>\d+)/', edit_entry, name='edit_entry'),
     url(r'^alphabet/(?P<char>[A-Z]{1})/', alphabet, name='alphabet'),
     url(r'^public/(?P<user_id>\d+)/', public, name='public'),
-
+    url(r'^delete/(?P<entry_id>\d+)/', delete, name='delete'),
 
 )
