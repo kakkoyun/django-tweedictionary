@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, edit_item, alphabet, logout, public, login_error
+from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, edit_item, delete, alphabet, logout, public, login_error
 
 from django.contrib import admin
 admin.autodiscover()
