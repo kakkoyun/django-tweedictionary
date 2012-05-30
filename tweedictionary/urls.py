@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     #url(r'^login_error/$', login_error, name='login_error'),
     url(r'^logout/$', logout, name='logout'),
-    
+
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
     url(r'^item/(?P<item_id>\d+)/', items, name='items'),
