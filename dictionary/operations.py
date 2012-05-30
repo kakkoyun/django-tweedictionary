@@ -8,10 +8,11 @@ import twitter
 
 def send(request,entry_id):
 	twitter_user = request.user.social_auth.get(provider='twitter')
-	
+
 	if not twitter_user.tokens:
 	    return
-	access_token = twitter_user.tokens['oauth_token']
+
+    access_token = twitter_user.tokens['oauth_token']
 	access_token_secret = twitter_user.tokens['oauth_token_secret']
 
 	token = oauth.Token(access_token,access_token_secret)
@@ -19,22 +20,24 @@ def send(request,entry_id):
 	consumer_secret = settings.TWITTER_CONSUMER_SECRET
 	consumer = oauth.Consumer(consumer_key,consumer_secret)
 	client = oauth.Client(consumer,token)
-	
+
 	api = twitter.Api(consumer_key=consumer_key, consumer_secret=consumer_secret, 
-          access_token_key=settings.TWITTER_CONSUMER_KEY, access_token_secret=settings.TWITTER_CONSUMER_SECRET)
-          
-        api.PostUpdate(get_object_or_404(Entry, id=entry_id).content)
-          
+          access_token_key=access_token,
+          access_token_secret=access_token_secret)
+
+    api.PostUpdate(get_object_or_404(Entry, id=entry_id).content)
+
 	#data = (get_object_or_404(Entry, id=entry_id).content)[:115]+"..."+shorten_url("http://www.tweedictionary.com/entry/%s" %entry_id)
 #	data = get_object_or_404(Entry, id=entry_id).content
 #	request_uri = 'https://api.twitter.com/1/statuses/update.json'
 #	resp, content = client.request(request_uri, 'POST', data)
-	
 
-#def shorten_url(long_url):
-#     username = settings.BITLY_USERNAME
-#     password = settings.BITLY_PASSWORD
-#     bitly_url = "http://api.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, password, long_url)
-#     #req_url = urlencode(bitly_url)
-#     short_url = urlopen(bitly_url).read()
-#     return short_url
+def shorten_url(long_url):
+    username = settings.BITLY_USERNAME
+    password = settings.BITLY_PASSWORD
+    api_key = settings.BITLY_API_KEY
+
+    bitly_url = "http://api.bit.ly/v3/shorten?login={0}&apiKey={1}&longUrl={2}&format=txt"
+    req_url = urlencode(bitly_url.format(username, api_key, long_url)
+    short_url = urlopen(req_url).read()
+    return short_url

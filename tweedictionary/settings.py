@@ -212,4 +212,4 @@ SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 
 BITLY_USERNAME = 'tweedictionary'
 BITLY_PASSWORD = 'repltwit15'
-
+BITLY_API_KEY = 'R_b88ff92293220dceac3cd4f54775e04a'
