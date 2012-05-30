@@ -17,6 +17,11 @@ class EntryForm(forms.ModelForm):
         entry.save()
         send(request, entry.id)
         return entry
+        
+	def	saveAs(self, request, entry):
+		entry.content = self.cleaned_data["content"]
+		send(request, entry.id)
+		return entry
 
 class ItemForm(forms.ModelForm):
     class Meta:

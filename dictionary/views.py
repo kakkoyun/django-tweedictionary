@@ -84,10 +84,26 @@ def credits(request):
 def edit_entry(request,entry_id):
     """Entry edit page"""
     e = get_object_or_404(Entry, id=entry_id)
+    i = get_object_or_404(Item, id=e.belong.id)
+    if request.POST:
+        entryform = EntryForm(request.POST)
+        if entryform.is_valid():
+            e = entryform.saveAs(request, e)
+            entryform = EntryForm()
+            ctx = {
+                'item': i,
+                'entries': i.entries.all(),
+                'hot_items': hot_items(),
+                'entryform': entryform
+                }
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
+        entryform = EntryForm({'content' : e.content})
     ctx = {
-        'entry': e,
-        'hot_items': hot_items()
-    }
+        'entry' : e,
+        'hot_items' : hot_items(),
+        'entryform' : entryform
+       }
     return render_to_response('edit_entry.html', ctx, RequestContext(request))
 
 @login_required
