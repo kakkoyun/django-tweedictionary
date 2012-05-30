@@ -25,9 +25,9 @@ class Entry(models.Model):
 	verbose_name_plural = "Entries"
     def __unicode__(self):
         return self.content
-	def save(self):
-		self.last_modified = datetime.datetime.now()
-		(self.belong).save()
-	super(Item, self).save()
+    def save(self):
+	self.last_modified = datetime.datetime.now()
+	(self.belong).save()
+	super(Entry, self).save()
 
 
