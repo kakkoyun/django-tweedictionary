@@ -22,11 +22,11 @@ dynamic/
 static/
 git/
 tmp
-*.pyc 
+*.pyc
 manage.py
-settings.py
-wsgi.py
+#settings.py
+#wsgi.py
 *.json
 *#*
-*~ 
+*~
 #dy:wqnamic/temp/*
