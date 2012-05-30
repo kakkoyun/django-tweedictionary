@@ -29,3 +29,8 @@ class ItemForm(forms.ModelForm):
         item.creation_date = datetime.datetime.now()
         item.save()
         return item
+
+    def saveAs(self, request, item):
+        item.name = self.cleaned_data["name"]
+        item.save()
+        return item

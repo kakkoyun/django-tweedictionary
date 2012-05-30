@@ -88,17 +88,33 @@ def edit_entry(request,entry_id):
         'entry': e,
         'hot_items': hot_items()
     }
-    return render_to_response('edit.html', ctx, RequestContext(request))
+    return render_to_response('edit_entry.html', ctx, RequestContext(request))
 
 @login_required
 def edit_item(request,item_id):
     """Item edit page"""
-    e = get_object_or_404(Entry, id=entry_id)
+    i = get_object_or_404(Item, id=item_id)
+    if request.POST:
+        itemform = ItemForm(request.POST)
+        if itemform.is_valid():
+            i = itemform.saveAs(request, i)
+            entryform = EntryForm()
+            ctx = {
+                'item': i,
+                'entries': i.entries.all(),
+                'hot_items': hot_items(),
+                'entryform': entryform
+                }
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
+        itemform = ItemForm({'name' : i.name})
     ctx = {
-        'entry': e,
-        'hot_items': hot_items()
-    }
-    return render_to_response('edit.html', ctx, RequestContext(request))
+        'item' : i,
+        'hot_items' : hot_items(),
+        'itemform' : itemform
+       }
+    return render_to_response('edit_item.html', ctx, RequestContext(request))
+
 
 @login_required
 def add_item(request):
