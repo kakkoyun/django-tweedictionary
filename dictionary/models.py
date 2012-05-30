@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 class Item(models.Model):
     name = models.CharField(max_length=30)
@@ -10,6 +11,7 @@ class Item(models.Model):
 	return self.name
     def save(self):
         self.name = self.name.lower()
+        self.last_modified = datetime.datetime.now()
 	super(Item, self).save()
 
 
