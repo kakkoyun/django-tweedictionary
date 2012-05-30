@@ -34,8 +34,6 @@ def shorten_url(long_url):
     password = settings.BITLY_PASSWORD
     api_key = settings.BITLY_API_KEY
 
-    bitly_url =
-    "http://api.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt"
-    %(username, api_key, long_url)
+    bitly_url = "http://api.bit.ly/v3/shorten?login=%s&apiKey=%s&longUrl=%s&format=txt" %(username, api_key, long_url)
     short_url = urlopen(bitly_url).read()
     return short_url
