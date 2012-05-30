@@ -17,3 +17,15 @@ class EntryForm(forms.ModelForm):
         entry.save()
         send(request, entry.id)
         return entry
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        exclude = ["owner", "last_modified", "creation_date"]
+
+    def save(self, request):
+        item = Item( name = self.cleaned_data["name"],
+                owner = request.user)
+        item.creation_date = datetime.datetime.now()
+        item.save()
+        return item

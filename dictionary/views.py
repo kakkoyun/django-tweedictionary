@@ -8,10 +8,10 @@ from django.contrib.messages.api import get_messages
 import random
 
 from dictionary.models import Item, Entry
-from dictionary.forms import EntryForm
+from dictionary.forms import EntryForm, ItemForm
 from django.contrib.auth.models import User
-
 from social_auth.utils import setting
+
 # done
 def random_item():
     return Item.objects.order_by('?')[0]
@@ -21,13 +21,13 @@ def hot_items():
     """hot-items filter"""
     obj_list = Item.objects.all().order_by("-last_modified")
     return obj_list[:30]
-    
+
 # done
 @login_required
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect("/")
-    
+
 # done
 def home(request):
     """Home view"""
@@ -49,7 +49,7 @@ def home(request):
             'hot_items': hot_items()
             }
 	return render_to_response('index.html', ctx, RequestContext(request))
-    
+
 # done
 def items(request,item_id):
     """Item page"""
@@ -89,7 +89,7 @@ def edit_entry(request,entry_id):
         'hot_items': hot_items()
     }
     return render_to_response('edit.html', ctx, RequestContext(request))
-    
+
 @login_required
 def edit_item(request,item_id):
     """Item edit page"""
@@ -103,7 +103,25 @@ def edit_item(request,item_id):
 @login_required
 def add_item(request):
     """Add item page"""
-    return render_to_response('additem.html', RequestContext(request))
+    if request.POST:
+        itemform = ItemForm(request.POST)
+        if itemform.is_valid():
+            i = itemform.save(request)
+            entryform = EntryForm()
+            ctx = {
+                'item': i,
+                'entries': i.entries.all(),
+                'hot_items': hot_items(),
+                'entryform': entryform
+                }
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
+        itemform = ItemForm()
+    ctx = {
+       'hot_items' : hot_items(),
+       'itemform' : itemform
+       }
+    return render_to_response('additem.html', ctx, RequestContext(request))
 
 # done
 @login_required
@@ -145,11 +163,11 @@ def alphabet(request,char):
     	return render_to_response('list_log.html', ctx, RequestContext(request))
     else:
         return render_to_response('list.html', ctx, RequestContext(request))
-       
+
 def login_error(request):
     """Add item page"""
     return render_to_response('login_error.html', RequestContext(request))
-    
+
 @login_required
 def add_entry(request,item_id):
     """Add entry page"""
@@ -167,7 +185,7 @@ def add_entry(request,item_id):
             'entryform': entryform
     }
     return render_to_response('user.html', ctx, RequestContext(request))
-    
+
 def entry(request, entry_id):
     """entry show page"""
     entry = get_object_or_404(Entry, id=entry_id)
