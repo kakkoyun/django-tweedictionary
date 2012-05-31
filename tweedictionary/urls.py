@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
+from ajax_select import urls as ajax_select_urls
 
 from dictionary.views import search_form, home, profile, add_item, add_entry, credits, items, entry, edit_entry, retweet, edit_item, delete, alphabet, logout, public, login_error
 
@@ -12,14 +13,15 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/lookups/', include(ajax_select_urls)),
 
     # Social Auth urls.
     url(r'', include('social_auth.urls')),
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     url(r'^login_error/$', login_error, name='login_error'),
     url(r'^logout/$', logout, name='logout'),
-
     url(r'^search_form/$', search_form, name='search_form'),
+
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
     url(r'^item/(?P<item_id>\d+)/', items, name='items'),
