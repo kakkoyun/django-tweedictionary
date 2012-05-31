@@ -29,10 +29,14 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         exclude = ["owner", "last_modified", "creation_date"]
+    def is_item(self,request):
+	if Item.objects.filter(name=self.cleaned_data["name"]):
+		return False
+	else:
+		return True
 
     def save(self, request):
-        item = Item( name = self.cleaned_data["name"],
-                owner = request.user)
+        item = Item(name = self.cleaned_data["name"], owner = request.user)
         item.creation_date = datetime.datetime.now()
         item.save()
         return item

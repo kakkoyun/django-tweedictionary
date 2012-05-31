@@ -53,7 +53,7 @@ def home(request):
             'hot_items': hot_items(),
             'form' : form
             }
-	return render_to_response('index.html', ctx, RequestContext(request))
+        return render_to_response('index.html', ctx, RequestContext(request))
 
 # done
 def items(request,item_id):
@@ -147,7 +147,7 @@ def edit_item(request,item_id):
                     'entries': i.entries.all(),
                     'hot_items': hot_items(),
                     'entryform': entryform,
-		            'form' : form
+		    'form' : form
                 }
 	        return render_to_response('user.html', ctx, RequestContext(request))
         else:
@@ -156,12 +156,12 @@ def edit_item(request,item_id):
 	        'item' : i,
                 'hot_items' : hot_items(),
                 'itemform' : itemform,
-	            'form' : form
+	        'form' : form
             }
             return render_to_response('edit_item.html', ctx, RequestContext(request))
     else:
     	ctx = {
-        	'hot_items': hot_items(),
+            'hot_items': hot_items(),
             'error_name': "You can not edit this item. If it is necessary, please contact with the admin on gmail@grgizem ",
             'form' : form
        	}
@@ -175,7 +175,7 @@ def add_item(request):
     form = SearchForm(initial=initial)
     if request.POST:
         itemform = ItemForm(request.POST)
-        if itemform.is_valid():
+        if itemform.is_valid() and itemform.is_item(request) :
             i = itemform.save(request)
             entryform = EntryForm()
             ctx = {
@@ -186,6 +186,13 @@ def add_item(request):
 		'form' : form
             }
             return render_to_response('user.html', ctx, RequestContext(request))
+	else:
+	    ctx = {
+		    'hot_items': hot_items(),
+		    'error_name': "There is an item already.",
+		    'form': form
+	    }
+	    return render_to_response('error_log.html', ctx, RequestContext(request))
     else:
         itemform = ItemForm()
         ctx = {
@@ -269,14 +276,14 @@ def add_entry(request,item_id):
     		entryform.save(request,item)
     else:
     	entryform = EntryForm()
-        ctx = {
-    	    'item': item,
-            'entries': item.entries.all(),
-            'hot_items': hot_items(),
-            'entryform': entryform,
-            'form' : form
-        }
-        return render_to_response('user.html', ctx, RequestContext(request))
+    ctx = {
+       'item': item,
+        'entries': item.entries.all(),
+        'hot_items': hot_items(),
+        'entryform': entryform,
+        'form' : form
+    }
+    return render_to_response('user.html', ctx, RequestContext(request))
 
 # done
 def entry(request, entry_id):
