@@ -277,5 +277,6 @@ def retweet(request,entry_id):
         return render_to_response('error_log.html', ctx, RequestContext(request))
         
 def git(request):
-    return HttpResponseRedirect("http://www.github.com")
+    return redirect('http://www.github.com', permanent=True)
+ #   return HttpResponseRedirect("http://www.github.com")
 
