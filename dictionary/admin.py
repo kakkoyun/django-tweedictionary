@@ -3,15 +3,15 @@ from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
 from dictionary.models import Entry, Item
 
-#class ItemAdmin(admin.ModelAdmin):
+#class UserAdmin(admin.ModelAdmin):
 #    pass
-#admin.site.register(Item,ItemAdmin)
+#admin.site.register(User,ItemAdmin)
 
 # subclass AjaxSelectAdmin
 class ItemAdmin(AjaxSelectAdmin):
     # create an ajax form class using the factory function
     #                     model,fieldlist,   [form superclass]
-    form = make_ajax_form(Item, {'owner':'person'})
+    form = make_ajax_form(Item, ({'name':'item'}))
 
 admin.site.register(Item,ItemAdmin)
 admin.site.register(Entry)

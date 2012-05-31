@@ -2,6 +2,7 @@ import datetime
 from django import forms
 from dictionary.models import Entry, Item
 from dictionary.operations import send
+from ajax_select.fields import AutoCompleteField
 
 class EntryForm(forms.ModelForm):
     class Meta:
@@ -17,7 +18,7 @@ class EntryForm(forms.ModelForm):
         entry.save()
         send(request, entry.id)
         return entry
-        
+
     def saveAs(self, request, entry):
 	entry.content = self.cleaned_data["content"]
 	entry.save()
@@ -40,3 +41,11 @@ class ItemForm(forms.ModelForm):
         item.name = self.cleaned_data["name"]
         item.save()
         return item
+
+
+class SearchForm(forms.Form):
+
+    Search = AutoCompleteField(
+            'item',
+            required=True,
+            attrs={'size': 100})

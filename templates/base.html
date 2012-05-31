@@ -33,8 +33,11 @@
             <li><a href="/">Home</a></li>
             <li><a href="/credits">Credits</a></li>
           </ul>
-          <form class="navbar-search pull-left" action="">
-            <input type="text" class="search-query span2" placeholder="Search">
+    {% if entered %}
+		<p>You entered: <blockquote>{{ entered }}</blockquote></p>
+	{% endif %}
+          <form class="navbar-search pull-left search-query span2" action="{% url search_form %}" method="GET">
+                {{ form }}<input type="submit" class="btn btn-small btn-inverse">            
           </form>
           	{% block navbar %}{% endblock %}
         </div><!-- /.nav-collapse -->
