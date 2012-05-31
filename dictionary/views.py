@@ -97,58 +97,75 @@ def edit_entry(request,entry_id):
     initial = {'query': 'search'}
     form = SearchForm(initial=initial)
     e = get_object_or_404(Entry, id=entry_id)
-    i = get_object_or_404(Item, id=e.belong.id)
-    if request.POST:
-        entryform = EntryForm(request.POST)
-        if entryform.is_valid():
-            e = entryform.saveAs(request, e)
-            entryform = EntryForm()
+    if request.user.id == e.author.id:
+        i = get_object_or_404(Item, id=e.belong.id)
+        if request.POST:
+            entryform = EntryForm(request.POST)
+            if entryform.is_valid():
+                e = entryform.saveAs(request, e)
+                entryform = EntryForm()
+                ctx = {
+                    'item': i,
+                    'entries': i.entries.all(),
+                    'hot_items': hot_items(),
+                    'entryform': entryform,
+                    'form' : form
+                    }
+                return render_to_response('user.html', ctx, RequestContext(request))
+        else:
+            entryform = EntryForm({'content' : e.content})
             ctx = {
-                'item': i,
-                'entries': i.entries.all(),
-                'hot_items': hot_items(),
-                'entryform': entryform,
+                'entry' : e,
+                'hot_items' : hot_items(),
+                'entryform' : entryform,
                 'form' : form
-                }
-            return render_to_response('user.html', ctx, RequestContext(request))
+            }
+            return render_to_response('edit_entry.html', ctx, RequestContext(request))
     else:
-        entryform = EntryForm({'content' : e.content})
         ctx = {
-            'entry' : e,
             'hot_items' : hot_items(),
-            'entryform' : entryform,
+            'error_name' : "You can not edit this entry, you are not the author of this. If it is necessary, please contact with the admin on gmail@grgizem ",
             'form' : form
         }
-        return render_to_response('edit_entry.html', ctx, RequestContext(request))
+        return render_to_response('error_log.html', ctx, RequestContext(request))
 
+# done
 @login_required
 def edit_item(request,item_id):
     """Item edit page"""
     initial = {'query': 'search'}
     form = SearchForm(initial=initial)
     i = get_object_or_404(Item, id=item_id)
-    if request.POST:
-        itemform = ItemForm(request.POST)
-        if itemform.is_valid():
-            i = itemform.saveAs(request, i)
-            entryform = EntryForm()
+    if request.user.id == i.owner.id and i.entries.all():
+        if request.POST:
+            itemform = ItemForm(request.POST)
+            if itemform.is_valid():
+                i = itemform.saveAs(request, i)
+                entryform = EntryForm()
+                ctx = {
+                    'item': i,
+                    'entries': i.entries.all(),
+                    'hot_items': hot_items(),
+                    'entryform': entryform,
+		            'form' : form
+                }
+	        return render_to_response('user.html', ctx, RequestContext(request))
+        else:
+            itemform = ItemForm({'name' : i.name})
             ctx = {
-                'item': i,
-                'entries': i.entries.all(),
-                'hot_items': hot_items(),
-                'entryform': entryform,
-		'form' : form
+	        'item' : i,
+                'hot_items' : hot_items(),
+                'itemform' : itemform,
+	            'form' : form
             }
-	    return render_to_response('user.html', ctx, RequestContext(request))
+            return render_to_response('edit_item.html', ctx, RequestContext(request))
     else:
-        itemform = ItemForm({'name' : i.name})
-        ctx = {
-	    'item' : i,
-            'hot_items' : hot_items(),
-            'itemform' : itemform,
-	    'form' : form
-        }
-        return render_to_response('edit_item.html', ctx, RequestContext(request))
+    	ctx = {
+        	'hot_items': hot_items(),
+            'error_name': "You can not edit this item. If it is necessary, please contact with the admin on gmail@grgizem ",
+            'form' : form
+       	}
+        return render_to_response('error_log.html', ctx, RequestContext(request))
 
 # done
 @login_required
@@ -229,10 +246,15 @@ def alphabet(request,char):
         return render_to_response('list.html', ctx, RequestContext(request))
 
 def login_error(request):
-    """Add item page"""
+    """Login error page"""
     initial = {'query': 'search'}
     form = SearchForm(initial=initial)
-    return render_to_response('login_error.html',{'form': form }, RequestContext(request))
+    ctx = {
+    	'hot_items': hot_items(),
+        'form': form,
+    	'error_name': "Some error appeared on login, please try again. If this problem continues contact with the admin on gmail@grgizem "
+    }
+    return render_to_response('error.html', ctx, RequestContext(request))
 
 # done
 @login_required
@@ -295,6 +317,7 @@ def delete(request,entry_id):
     }
     return render_to_response('user.html', ctx, RequestContext(request))
 
+# done
 @login_required
 def retweet(request,entry_id):
     initial = {'query': 'search'}
@@ -321,8 +344,10 @@ def retweet(request,entry_id):
 def search_form(request):
     initial = {'query': 'search'}
     form = SearchForm(initial=initial)
-    if 'search' in request.GET:
+    entryform = EntryForm()
+    if 'query' in request.GET:
         if request.user.is_authenticated():
+            i = form.cleaned_data['query']
             ctx = {
                    'item': i,
                     'entries': i.entries.all(),
@@ -337,6 +362,7 @@ def search_form(request):
 
     else:
         if request.user.is_authenticated():
+            i = random_item()
             ctx = {
                 'item': i,
                 'entries': i.entries.all(),

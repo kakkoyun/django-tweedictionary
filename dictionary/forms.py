@@ -45,7 +45,7 @@ class ItemForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
 
-    Search = AutoCompleteField(
+    query = AutoCompleteField(
             'item',
             required=True,
             attrs={'size': 100})

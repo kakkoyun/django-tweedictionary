@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # Social Auth urls.
     url(r'', include('social_auth.urls')),
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
-    #url(r'^login_error/$', login_error, name='login_error'),
+    url(r'^login_error/$', login_error, name='login_error'),
     url(r'^logout/$', logout, name='logout'),
 
     url(r'^search_form/$', search_form, name='search_form'),

@@ -22,7 +22,7 @@ class Entry(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     belong = models.ForeignKey(Item, related_name="entries")
     class Meta:
-	ordering = ['last_modified']
+	ordering = ['date']
 	verbose_name_plural = "Entries"
     def __unicode__(self):
         return self.content
