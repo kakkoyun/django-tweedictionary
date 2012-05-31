@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, edit_item, delete, alphabet, logout, public, login_error
+from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, retweet, edit_item, delete, alphabet, logout, public, login_error
 
 from django.contrib import admin
 admin.autodiscover()
@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^credits/', credits, name='credits'),
     url(r'^edit_item/(?P<item_id>\d+)/', edit_item, name='edit_item'),
     url(r'^edit_entry/(?P<entry_id>\d+)/', edit_entry, name='edit_entry'),
+    url(r'^retweet/(?P<entry_id>\d+)/', retweet, name='retweet'),
     url(r'^alphabet/(?P<char>[A-Z]{1})/', alphabet, name='alphabet'),
     url(r'^public/(?P<user_id>\d+)/', public, name='public'),
     url(r'^delete/(?P<entry_id>\d+)/', delete, name='delete'),

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.contrib.messages.api import get_messages
+from dictionary.operations import send
 
 import random
 
@@ -250,3 +251,22 @@ def delete(request,entry_id):
 		'entryform': entryform
 	}
 	return render_to_response('user.html', ctx, RequestContext(request))
+
+@login_required
+def retweet(request,entry_id):
+    entry = get_object_or_404(Entry, id=entry_id)
+    if (request.user.id== entry.author.id) :
+        send(request,entry_id)
+        ctx = {
+                'item': entry.belong,
+                'entries': entry.belong.entries.all(),
+                'hot_items': hot_items(),
+                'entryform': EntryForm()
+        }
+        return render_to_response('user.html', ctx, RequestContext(request))
+    else:
+        ctx = {
+                'error_name': "This is not your entry, you can not tweet it!",
+                'hot_items': hot_items()
+        }
+        return render_to_response('error_log.html', ctx, RequestContext(request))
