@@ -198,8 +198,12 @@ def alphabet(request,char):
         return render_to_response('list.html', ctx, RequestContext(request))
 
 def login_error(request):
-    """Add item page"""
-    return render_to_response('login_error.html', RequestContext(request))
+    """Login error page"""
+    ctx = {
+    	'hot_items': hot_items(),
+    	'error_name': "Some error appeared on login, please try again. If this problem continues contact with the admin on gmail@grgizem "
+    }
+    return render_to_response('error.html', ctx, RequestContext(request))
 
 # done
 @login_required
