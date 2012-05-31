@@ -347,17 +347,44 @@ def search_form(request):
     entryform = EntryForm()
     if 'query' in request.GET:
         if request.user.is_authenticated():
-            i = form.cleaned_data['query']
+            entered = request.GET.get('query')
+            try:
+                i = Item.objects.get(name=entered)
+            except Item.DoesNotExist:
+                ctx = {
+    	            'hot_items': hot_items(),
+                    'form': form,
+    	            'error_name': "Object not found!"
+                }
+                return render_to_response('error_log.html', ctx, RequestContext(request))
             ctx = {
-                   'item': i,
-                    'entries': i.entries.all(),
-                    'hot_items': hot_items(),
-                    'entryform': entryform,
-                    'entered' : request.GET.get('query'),
-                    'form' : form
+                       'item': i,
+                        'entries': i.entries.all(),
+                        'hot_items': hot_items(),
+                        'entryform': entryform,
+                        'entered' : entered,
+                        'form' : form
             }
             return render_to_response('user.html', ctx, RequestContext(request))
         else:
+            entered = request.GET.get('query')
+            try:
+                i = Item.objects.get(name=entered)
+            except Item.DoesNotExist:
+                ctx = {
+    	            'hot_items': hot_items(),
+                    'form': form,
+    	            'error_name': "Object not found!"
+                }
+                return render_to_response('error.html', ctx, RequestContext(request))
+            ctx = {
+                       'item': i,
+                        'entries': i.entries.all(),
+                        'hot_items': hot_items(),
+                        'entryform': entryform,
+                        'entered' : entered,
+                        'form' : form
+            }
             return render_to_response('index.html', ctx, RequestContext(request))
 
     else:
