@@ -85,52 +85,67 @@ def credits(request):
 def edit_entry(request,entry_id):
     """Entry edit page"""
     e = get_object_or_404(Entry, id=entry_id)
-    i = get_object_or_404(Item, id=e.belong.id)
-    if request.POST:
-        entryform = EntryForm(request.POST)
-        if entryform.is_valid():
-            e = entryform.saveAs(request, e)
-            entryform = EntryForm()
-            ctx = {
-                'item': i,
-                'entries': i.entries.all(),
-                'hot_items': hot_items(),
-                'entryform': entryform
-                }
-        return render_to_response('user.html', ctx, RequestContext(request))
+    if request.user.id == e.author.id :
+	    i = get_object_or_404(Item, id=e.belong.id)
+	    if request.POST:
+		entryform = EntryForm(request.POST)
+		if entryform.is_valid():
+		    e = entryform.saveAs(request, e)
+		    entryform = EntryForm()
+		    ctx = {
+		        'item': i,
+		        'entries': i.entries.all(),
+		        'hot_items': hot_items(),
+		        'entryform': entryform
+		        }
+		return render_to_response('user.html', ctx, RequestContext(request))
+	    else:
+		entryform = EntryForm({'content' : e.content})
+	    ctx = {
+		'entry' : e,
+		'hot_items' : hot_items(),
+		'entryform' : entryform
+	       }
+	    return render_to_response('edit_entry.html', ctx, RequestContext(request))
     else:
-        entryform = EntryForm({'content' : e.content})
-    ctx = {
-        'entry' : e,
-        'hot_items' : hot_items(),
-        'entryform' : entryform
-       }
-    return render_to_response('edit_entry.html', ctx, RequestContext(request))
+    	ctx = {
+    		'hot_items': hot_items(),
+    		'error_name': "You can not edit this entry, you are not the author of this. If it is necessary, please contact with the admin on gmail@grgizem "
+   	}
+    	return render_to_response('error_log.html', ctx, RequestContext(request))
 
+# done
 @login_required
 def edit_item(request,item_id):
     """Item edit page"""
     i = get_object_or_404(Item, id=item_id)
-    if request.POST:
-        itemform = ItemForm(request.POST)
-        if itemform.is_valid():
-            i = itemform.saveAs(request, i)
-            entryform = EntryForm()
-            ctx = {
-                'item': i,
-                'entries': i.entries.all(),
-                'hot_items': hot_items(),
-                'entryform': entryform
-                }
-        return render_to_response('user.html', ctx, RequestContext(request))
+    if request.user.id == i.owner.id and i.entries.all():
+	    if request.POST:
+		itemform = ItemForm(request.POST)
+		if itemform.is_valid():
+		    i = itemform.saveAs(request, i)
+		    entryform = EntryForm()
+		    ctx = {
+		        'item': i,
+		        'entries': i.entries.all(),
+		        'hot_items': hot_items(),
+		        'entryform': entryform
+		        }
+		return render_to_response('user.html', ctx, RequestContext(request))
+	    else:
+		itemform = ItemForm({'name' : i.name})
+	    ctx = {
+		'item' : i,
+		'hot_items' : hot_items(),
+		'itemform' : itemform
+	       }
+	    return render_to_response('edit_item.html', ctx, RequestContext(request))
     else:
-        itemform = ItemForm({'name' : i.name})
-    ctx = {
-        'item' : i,
-        'hot_items' : hot_items(),
-        'itemform' : itemform
-       }
-    return render_to_response('edit_item.html', ctx, RequestContext(request))
+    	ctx = {
+    		'hot_items': hot_items(),
+    		'error_name': "You can not edit this item. If it is necessary, please contact with the admin on gmail@grgizem "
+   	}
+    	return render_to_response('error_log.html', ctx, RequestContext(request))
 
 # done
 @login_required
@@ -276,7 +291,7 @@ def retweet(request,entry_id):
         }
         return render_to_response('error_log.html', ctx, RequestContext(request))
         
-def git(request):
-    return redirect('http://www.github.com', permanent=True)
- #   return HttpResponseRedirect("http://www.github.com")
+#def git(request):
+#   # return redirect('http://www.github.com', permanent=True)
+#    return HttpResponseRedirect('http://www.github.com')
 

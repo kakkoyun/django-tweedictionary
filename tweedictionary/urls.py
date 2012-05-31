@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
-from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, retweet, edit_item, delete, alphabet, logout, public, login_error, git
+from dictionary.views import home, profile, add_item, add_entry, credits, items, entry, edit_entry, retweet, edit_item, delete, alphabet, logout, public, login_error
 
 from django.contrib import admin
 admin.autodiscover()
@@ -18,9 +18,6 @@ urlpatterns = patterns('',
     url(r'^login/$', redirect_to, {'url' : '/login/twitter'}),
     url(r'^login_error/$', login_error, name='login_error'),
     url(r'^logout/$', logout, name='logout'),
-
-    # Github project redirection
-    url(r'^git/$', git, name='git'),
 
     # Tweedictionary urls.
     url(r'^$', home, name='home'),
